@@ -1,0 +1,19 @@
+#include <L298N.h>
+L298N myMotor(10,9,8);
+
+void setup() {
+  // put your setup code here, to run once:
+myMotor.setSpeed(200);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  myMotor.forward();
+  delay(10000);
+  myMotor.stop();
+  delay(500);
+  myMotor.backward():
+  delay(10000);
+}
+//Reference: https://github.com/AndreaLombardo/L298N
