@@ -1,5 +1,5 @@
 #include <L298N.h>
-L298N myMotor(9,8,7);
+L298N myMotor(10,8,7);
 int S0 = 2;
 int S1 = 3;
 int S2 = 4;
@@ -8,6 +8,8 @@ int sensorOut = 6;
 int redfrequency = 0;
 int greenfrequency = 0;
 int bluefrequency = 0;
+
+int servo_controller = 9;
 
 void setup() {
   // put your setup code here, to run once:
