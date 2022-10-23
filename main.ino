@@ -1,5 +1,7 @@
 #include <L298N.h>
 L298N myMotor(10,8,7);
+#include <Servo.h>
+Servo myServo;
 int S0 = 2;
 int S1 = 3;
 int S2 = 4;
@@ -8,8 +10,18 @@ int sensorOut = 6;
 int redfrequency = 0;
 int greenfrequency = 0;
 int bluefrequency = 0;
+String founded_color;
 
 int servo_controller = 9;
+
+//servo postion of cup: red, yellow, orange, blue, green, brown, other
+int redPos = 92;
+int yellowPos = 104;
+int orangePos = 116;
+int bluePos = 127;
+int greenPos = 138;
+int brownPos = 148;
+int otherPos = 159;
 
 void setup() {
   // put your setup code here, to run once:
@@ -24,15 +36,43 @@ pinMode(S0, OUTPUT);
 digitalWrite(S0, HIGH);
 digitalWrite(S1, LOW);
 
+//Set up servo
+myServo.attach(servo_controller);
+myServo.write(0);
+delay(100);
+
 Serial.begin(9600);
 
 
 }
 
-void what_color (int minired,int maxired,int minigreen, int maxigreen, int miniblue, int maxiblue,String color){
+String what_color (int minired,int maxired,int minigreen, int maxigreen, int miniblue, int maxiblue,String color){
   if (redfrequency > minired && redfrequency < maxired && greenfrequency < maxigreen && greenfrequency > minigreen && bluefrequency < maxiblue && bluefrequency > miniblue){
   Serial.println(color);
+  return color;
 }
+}
+
+//Turn the servo
+void turning_servo(String color){
+  if (color == "RED"){
+    myServo.write(redPos);
+  }
+  else if (color == "YELLOW"){
+    myServo.write(yellowPos);
+  }
+   else if (color == "ORANGE"){
+    myServo.write(orangePos);
+  }
+   else if (color == "BLUE"){
+    myServo.write(bluePos);
+  }
+   else if (color == "GREEN"){
+    myServo.write(greenPos);
+  }
+   else if (color == "BROWN"){
+    myServo.write(brownPos);
+  }
 }
 
 
@@ -80,9 +120,14 @@ delay(100);
 
 
 //Find the color
-what_color(0, 100, 0, 100, 0, 100, "BROWN");
+founded_color= what_color(0, 100, 0, 100, 0, 100, "RED");
+founded_color=what_color(0, 100, 0, 100, 0, 100, "YELLOW");
+founded_color=what_color(0, 100, 0, 100, 0, 100, "ORANGE");
+founded_color=what_color(0, 100, 0, 100, 0, 100, "BLUE");
+founded_color=what_color(0, 100, 0, 100, 0, 100, "GREEN");
+founded_color=what_color(0, 100, 0, 100, 0, 100, "BROWN");
 
-
+turning_servo(founded_color);
 
 Serial.println();
 delay(500);
