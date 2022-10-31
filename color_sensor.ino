@@ -3,7 +3,6 @@
   modified on 7 May 2019
   by Mohammadreza Akbari @ Electropeak
   https://electropeak.com/learn/
-
   Color Sensor      Arduino
   -----------      --------
   VCC               5V
@@ -84,6 +83,27 @@ void setup()
   digitalWrite(s1, HIGH);
 }
 
+String compare(){
+  if (red >=0 && red <20 && green >45 && green < 58 && blue >70 && blue <90){
+    Serial.println("BLUE");
+  }
+  else if (red >110 && red <120 && green >95 && green < 115 && blue > 35 && blue < 70){
+    Serial.println("YELLOW");
+  }
+  else if (red > 95 && red < 110&& green > 30 && green < 45 && blue > 15 && blue < 30){
+    Serial.println("ORANGE");
+  }
+  else if (red > 55 && red <  78&& green > 5&& green <  25&& blue > 8 && blue < 20){
+    Serial.println("RED");
+  }
+  else if (red > 30 && red < 50 && green > 60&& green < 75 && blue > 15 && blue <40){
+    Serial.println("GREEN");
+  }
+  else if (red > 5 && red < 25 && green >= 0 && green < 20 && blue >= 0 && blue < 15){
+    Serial.println("BROWN");
+  }
+}
+
 void loop()
 {
   color();
@@ -101,5 +121,6 @@ void loop()
   Serial.print(green);
   Serial.print(" B Intensity : ");
   Serial.println(blue);
-  delay(200);
+  delay(100);
+  compare();
 }
